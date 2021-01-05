@@ -6,7 +6,7 @@ import VideoDetail from './VideoDetail';
 
 const App = () => {
 
-    const [video, setVideo] = useState([]);
+    const [videos, setVideos] = useState([]);
     const [selectedVideo, setSelectedVideo] = useState(null);
 
     useEffect(() => {
@@ -20,15 +20,11 @@ const App = () => {
             }
         });
 
-        setVideo(response.data.items);
+        setVideos(response.data.items);
         setSelectedVideo(response.data.items[0]);
     };
 
-     const onVideoSelect = video => {
-        setSelectedVideo(video);
-      };
-
-      return (
+    return (
         <div className="ui container">
             <SearchBar onFormSubmit={onTermSubmit}/>
             <div className="ui grid">
@@ -38,8 +34,8 @@ const App = () => {
                     </div>
                     <div className="five wide column">
                         <VideoList 
-                            onVideoSelect={onVideoSelect} 
-                            videos={video}
+                            onVideoSelect={setSelectedVideo} 
+                            videos={videos}
                         />    
                     </div>
                 </div>
